@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Lists{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('addWordlists.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for list in lists %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ list['name'] }}</h1>
+          <div class="about">by {{ list['author_id'] }} on {{ list['created'].strftime('%Y-%m-%d') }}</div>
+        </div>
+      </header>
+      <p class="body">{{ list['name'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
