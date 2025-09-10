@@ -15,7 +15,7 @@ body {
   margin: 0;
   padding: 24px;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, #0a1120, #0f1730);
+  background: linear-gradient(180deg, #4d86ff, #203768);
   color: var(--text);
 }
 
@@ -92,10 +92,10 @@ td input {
 
 /*html { font-family: sans-serif; background: #eee; padding: 1rem; }*/
 /*body { max-width: 960px; margin: 0 auto; background: white; }*/
-h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
+h1 { font-family: serif; color: #618eac; margin: 1rem 0; }
 a { color: #377ba8; }
 hr { border: none; border-top: 1px solid lightgray; }
-nav { background: lightgray; display: flex; align-items: center; padding: 0 0.5rem; }
+nav {background: #132141;display: flex;align-items: center;padding: 2.5rem 3.5rem;margin: 1rem 35rem;border-radius: 16px;}
 nav h1 { flex: auto; margin: 0; }
 nav h1 a { text-decoration: none; padding: 0.25rem 0.5rem; }
 nav ul  { display: flex; list-style: none; margin: 0; padding: 0; }
