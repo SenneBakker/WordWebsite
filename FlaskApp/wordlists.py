@@ -14,7 +14,7 @@ bp = Blueprint('wordlists', __name__, url_prefix='/wordlists')
 @bp.route('/')
 def index():
     db = get_db()
-    query = query = """
+    query = """
 SELECT
     w.author_id AS wordlist_id,
     w.name AS name,
@@ -22,7 +22,7 @@ SELECT
     u.id AS user_id,
     u.username AS username
 FROM wordlists w
-INNER JOIN user u ON u.id = w.author_id;"""
+INNER JOIN user u ON u.id = w.author_id ORDER BY created;"""
 
     lists = db.execute(query).fetchall()
     return render_template('wordlists.html', lists = lists)
