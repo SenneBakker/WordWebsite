@@ -1,25 +1,76 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Lists{% endblock %}</h1>
-  {% if g.user %}
-    <a class="action" href="{{ url_for('addWordlists.create') }}">New</a>
-  {% endif %}
+    <h1>Dashboard</h1>
 {% endblock %}
 
 {% block content %}
-  {% for list in lists %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ list['name'] }}</h1>
-          <div class="about">by {{ list['username'] }} on {{ list['created'].strftime('%Y-%m-%d') }}</div>
+<body>
+        <!-- Flash Message Example -->
+        <div class="flash">Welcome back Admin!</div>
+
+        <!-- Example Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Account settings</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Manage your account and settings</p>
+                <button>Get Started</button>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Statistics</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">View your activity and progress</p>
+                <button>View Details</button>
+            </div>
         </div>
-      </header>
-      <p class="body">{{ list['name'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+
+        <!-- Example Table -->
+        <div style="margin-top: 2rem;">
+            <h2 style="margin-bottom: 1rem; color: var(--text-primary);">Your wordlists</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Word list 1</td>
+                        <td><span style="background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem;">Active</span></td>
+                        <td>2 hours ago</td>
+                        <td>
+                            <button style="padding: 0.5rem 1rem; font-size: 0.75rem;">Edit</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Word list 2</td>
+                        <td><span style="background: var(--warning); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem;">Pending</span></td>
+                        <td>1 day ago</td>
+                        <td>
+                            <button style="padding: 0.5rem 1rem; font-size: 0.75rem;">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Example Form -->
+        <form style="margin-top: 2rem;" action="{{ url_for('wordlists.create') }}" method="post">
+            <h2 style="margin-bottom: 1.5rem; color: var(--text-primary);">Create New Word List</h2>
+
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter title..." required>
+
+
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <input type="submit" value="Create Item">
+                <button type="button" class="btn danger">Cancel</button>
+            </div>
+        </form>
+</body>
 {% endblock %}
+

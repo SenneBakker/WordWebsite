@@ -1,3 +1,4 @@
+import click
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
@@ -15,14 +16,14 @@ bp = Blueprint('wordlists', __name__, url_prefix='/wordlists')
 def index():
     db = get_db()
     query = """
-SELECT
-    w.author_id AS wordlist_id,
-    w.name AS name,
-    w.created AS created,
-    u.id AS user_id,
-    u.username AS username
-FROM wordlists w
-INNER JOIN user u ON u.id = w.author_id ORDER BY created;"""
+    SELECT
+        w.author_id AS wordlist_id,
+        w.name AS name,
+        w.created AS created,
+        u.id AS user_id,
+        u.username AS username
+    FROM wordlists w
+    INNER JOIN user u ON u.id = w.author_id ORDER BY created;"""
 
     lists = db.execute(query).fetchall()
     return render_template('wordlists.html', lists = lists)
@@ -33,22 +34,16 @@ INNER JOIN user u ON u.id = w.author_id ORDER BY created;"""
 def create():
     if request.method == 'POST':
         name = request.form['title']
-        body = request.form['body']
-        error = None
-
-        if not name:
-            error = 'Title is required.'
-
-        if error is not None:
-            flash(error)
-        else:
-            db = get_db()
-            db.execute(
-                'INSERT INTO post (title, body, author_id)' 
-                ' VALUES (?, ?, ?)',
-                (g.user['id'], name, datetime.date.today().strftime('%Y-%m-%d'))
-            )
-            db.commit()
-            return redirect(url_for('addWordlists.index'))
+        db = get_db()
+        db.execute(
+            'INSERT INTO wordlists (author_id, name, created)' 
+            ' VALUES (?, ?, ?)',
+            (g.user['id'], name, datetime.date.today().strftime('%Y-%m-%d'))
+        )
+        db.commit()
+        return redirect(url_for('addWordlists.render', name = name.strip()))
 
     return render_template('wordlists.html')
+
+
+

@@ -1,36 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Add Word Pairs</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Add Wordlist</h1>
+{% endblock %}
+
+{% block content %}
+
 <body>
   <div class="container">
     <div class="card">
-      <h1>Add Word Pairs</h1>
-      <form method="post" action="add">
-        <h2>Name of word list</h2>
-        <input type="text" name="listname" placeholder="Name of list" required>
+      <h1>{{ title }}</h1>
+      <form method="post" action="{{ url_for('addWordlists.add', name=name) }}">
+        <h2>{{ name }}</h2>
+
         <table class="pairs-table">
           <thead>
             <tr>
-              <th>Source Word</th>
-              <th>Target Word</th>
+              <th>English</th>
+              <th>Portuguese</th>
               <th></th>
             </tr>
           </thead>
           <tbody id="pairs-body">
+          {% for i in range(0,5) %}
             <tr>
               <td><input type="text" name="source_word[]" placeholder="house"></td>
               <td><input type="text" name="target_word[]" placeholder="casa"></td>
               <td><button type="button" class="btn danger" onclick="removeRow(this)">✕</button></td>
             </tr>
+          {% endfor %}
           </tbody>
         </table>
         <div class="controls">
           <button type="button" class="btn" onclick="addRow()">+ Add Row</button>
-          <button type="submit" class="btn primary" onclick="{{ url_for('addWordlists.add') }}">Save Words</button>
+          <button type="submit" class="btn primary" >Save Words</button>
         </div>
       </form>
     </div>
@@ -52,3 +55,4 @@
   </script>
 </body>
 </html>
+{% endblock %}
