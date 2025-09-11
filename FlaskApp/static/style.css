@@ -20,7 +20,6 @@
 
 * {
     box-sizing: border-box;
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -149,7 +148,58 @@ nav ul li a:hover {
     margin: 1rem 0;
     color: var(--text-primary);
     box-shadow: 0 4px 6px var(--shadow);
-    animation:
+    position: relative;
+    animation: slideIn 0.5s ease;
+    transition: all 0.3s ease;
+}
+
+.flash.flash-success {
+    border-left-color: var(--success);
+    border-color: var(--success);
+}
+
+.flash.flash-error,
+.flash.flash-danger {
+    border-left-color: var(--danger);
+    border-color: var(--danger);
+}
+
+.flash.flash-warning {
+    border-left-color: var(--warning);
+    border-color: var(--warning);
+}
+
+.flash.fade-out {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.flash .close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    size: 1rem 10rem;
+}
+
+.flash .close-btn:hover {
+    color: var(--text-primary);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Cards */

@@ -7,7 +7,10 @@
 {% block content %}
 <body>
         <!-- Flash Message Example -->
-        <div class="flash">Welcome back Admin!</div>
+        <div class="flash flash-{{ 'succes' }}" data-auto-dismiss="3000">
+            <h2>Welcome back Admin!</h2>
+            <button class="close-btn" onclick="dismissFlash(this)">&times;</button>
+        </div>
 
         <!-- Example Cards -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
